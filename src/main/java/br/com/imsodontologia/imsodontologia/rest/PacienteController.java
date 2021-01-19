@@ -46,4 +46,12 @@ public class PacienteController {
                 }
         ).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não encontrado"));
     }
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable Integer id, @RequestBody @Valid Paciente pacienteAtualizado){
+        repository.findById(id).map(pacienteDesatualizada ->{
+            pacienteAtualizado.setId(pacienteDesatualizada.getId());
+            return repository.save(pacienteAtualizado);
+        }).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não Encontrado"));
+    }
 }

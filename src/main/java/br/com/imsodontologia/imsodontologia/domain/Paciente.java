@@ -25,14 +25,17 @@ public class Paciente {
     private Integer id;
 
     @NotEmpty(message = "O NOME COMPLETO não pode ser vazio.")
+    @Column
     private String paciente;
 
     @CPF(message = "CPF inválido! Por favor, verifique.")
     @NotEmpty(message = "O campo CPF não pode ser vazio.")
     private String cpf;
 
+    @Column
     private String endereco;
 
+    @Column
     private String telefone;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
