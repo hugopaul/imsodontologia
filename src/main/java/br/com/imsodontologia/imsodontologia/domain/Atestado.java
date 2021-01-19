@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "prontuario",uniqueConstraints = @UniqueConstraint(columnNames = {"id", "id_paciente"}))
+@Table(name = "atestado",uniqueConstraints = @UniqueConstraint(columnNames = {"id", "id_paciente"}))
 public class Atestado {
 
 
@@ -46,7 +46,6 @@ public class Atestado {
 
     @NaturalId
     @OneToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_paciente")
     @NotNull(message = "Escolha o Paciente para continuar registrar o Atestado Médico!")
     @JsonFormat
