@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/atestado")
+@RequestMapping("/atestados")
 public class AtestadoController {
 
     private final AtestadoRepository repository;

@@ -19,19 +19,23 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "financeiro",uniqueConstraints = @UniqueConstraint(columnNames = {"id", "id_paciente"}))
+@Table(name = "financeiro",uniqueConstraints = @UniqueConstraint(columnNames = {"id", "id_prontuario"}))
 public class Financeiro {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
 
-        @NaturalId
         @OneToOne
-        @JoinColumn(name = "id_paciente")
-        @NotNull(message = "Escolha o Paciente para continuar registrar o Atestado Médico!")
+        @JoinColumn(name = "id_prontuario")
         @JsonFormat
-        private Paciente paciente;
+        private Prontuario prontuario;
+
+        @Column
+        private Double valor;
+
+        @Column
+        private String descricao;
 
         @JsonFormat(pattern = "dd/MM/yyyy")
         @Column(name = "data_de_cadastro", updatable = false)

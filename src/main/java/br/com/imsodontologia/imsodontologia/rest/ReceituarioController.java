@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/receituario")
+@RequestMapping("/receituarios")
 public class ReceituarioController {
 
     private final ReceituarioRepository repository;

@@ -19,7 +19,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "receituario",uniqueConstraints = @UniqueConstraint(columnNames = {"id", "id_paciente"}))
+@Table(name = "receituario",uniqueConstraints = @UniqueConstraint(columnNames = {"id", "id_prontuario"}))
 public class Receituario {
 
     @Id
@@ -38,12 +38,11 @@ public class Receituario {
     @Column
     private Integer dias;
 
-    @NaturalId
     @OneToOne
-    @JoinColumn(name = "id_paciente")
+    @JoinColumn(name = "id_prontuario")
     @NotNull(message = "Escolha o Paciente para continuar registrar o Atestado Médico!")
     @JsonFormat
-    private Paciente paciente;
+    private Prontuario prontuario;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "data_de_cadastro", updatable = false)

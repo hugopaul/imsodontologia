@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/financeiro")
+@RequestMapping("/financeiros")
 public class FinanceiroController {
 
     private final FinanceiroRepository repository;
