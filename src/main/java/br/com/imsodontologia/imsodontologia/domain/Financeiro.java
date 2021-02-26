@@ -32,12 +32,12 @@ public class Financeiro {
         private Prontuario prontuario;
 
         @Column
-        private Double valor;
+        private String valor;
 
         @Column
         private String descricao;
 
-        @JsonFormat(pattern = "dd/MM/yyyy")
+        @JsonFormat(pattern = "yyyy-MM-dd")
         @Column(name = "data_de_cadastro", updatable = false)
         private LocalDate dataLancamento;
 

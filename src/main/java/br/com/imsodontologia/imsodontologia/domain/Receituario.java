@@ -30,7 +30,7 @@ public class Receituario {
     @Column
     private String medicamento;
 
-    @NotNull(message = "O campo horas de repouso é obrigatório!")
+    @NotNull(message = "Campo horas é obrigatório!")
     @Column
     private Time horas;
 
@@ -40,11 +40,11 @@ public class Receituario {
 
     @OneToOne
     @JoinColumn(name = "id_prontuario")
-    @NotNull(message = "Escolha o Paciente para continuar registrar o Atestado Médico!")
+    @NotNull(message = "Escolha o Paciente para registrar o Receituário!")
     @JsonFormat
     private Prontuario prontuario;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "data_de_cadastro", updatable = false)
     private LocalDate dataCadastro;
 

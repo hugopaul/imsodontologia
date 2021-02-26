@@ -28,10 +28,11 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotEmpty(message = "O NOME COMPLETO não pode ser vazio.")
+    @NotEmpty(message = "O NOME não pode ser vazio.")
     @Column
     private String paciente;
 
+    @NaturalId
     @CPF(message = "CPF inválido! Por favor, verifique.")
     @NotEmpty(message = "O campo CPF não pode ser vazio.")
     private String cpf;
@@ -40,9 +41,10 @@ public class Paciente {
     private String endereco;
 
     @Column
+    @NotEmpty(message = "O NOME não pode ser vazio.")
     private String telefone;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "data_de_nascimento")
     private Date dataNascimento;
 

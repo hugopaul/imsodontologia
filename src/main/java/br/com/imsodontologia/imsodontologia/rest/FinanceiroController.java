@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/financeiros")
 public class FinanceiroController {
@@ -22,11 +22,13 @@ public class FinanceiroController {
     public FinanceiroController(FinanceiroRepository repository){
         this.repository = repository;
     }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Financeiro salvar (@RequestBody @Valid Financeiro financeiro){
         return repository.save(financeiro);
     }
+
     @GetMapping("{id}")
     public Financeiro findById(@PathVariable Integer id){
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(
@@ -46,7 +48,7 @@ public class FinanceiroController {
                     repository.delete(financeiro);
                     return Void.TYPE;
                 }
-        ).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Atestado não encontrado"));
+        ).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Lançamento não encontrado"));
     }
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

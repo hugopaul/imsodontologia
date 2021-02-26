@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/receituarios")
 public class ReceituarioController {

@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
@@ -20,15 +21,24 @@ public class PacienteController {
     public PacienteController(PacienteRepository repository){
         this.repository = repository;
     }
+
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Paciente salvar (@RequestBody @Valid Paciente paciente){
-        return repository.save(paciente);
+        try {
+            return repository.save(paciente);
+        } catch (Exception ex){
+            throw new ResponseStatusException( HttpStatus.BAD_REQUEST , "Esta CPF já foi cadastrado!");
+        }
     }
+
+
+
     @GetMapping("{id}")
     public Paciente findById(@PathVariable Integer id){
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Paciente não Encontrada"
+                        HttpStatus.NOT_FOUND, "Paciente não Encontrado(a)"
                 )
         );
     }

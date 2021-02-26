@@ -40,17 +40,16 @@ public class Atestado {
     @Column
     private Integer repouso;
 
-    @NotNull(message = "O campo CID é obrigatório!")
     @Column
     private Integer cid;
 
     @OneToOne
     @JoinColumn(name = "id_prontuario")
-    @NotNull(message = "Escolha o Paciente para continuar registrar o Atestado Médico!")
+    @NotNull(message = "Escolha o Paciente para registrar!")
     @JsonFormat
     private Prontuario prontuario;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "data_de_cadastro", updatable = false)
     private LocalDate dataCadastro;
 

@@ -64,81 +64,10 @@ public class Prontuario {
     private String observacao ;
 
     @Column
-    private Integer serviço;
-
-    @Column
-    private String valor;
-
-    @Column
-    private String onze;
-    @Column
-    private String doze;
-    @Column
-    private String treze;
-    @Column
-    private String quatorze;
-    @Column
-    private String  quinze;
-    @Column
-    private String   dezesseis;
-    @Column
-    private String  dezessete;
-    @Column
-    private String   dezoito;
-
-    @Column
-    private String   vinteum;
-    @Column
-    private String   vintedois;
-    @Column
-    private String  vintetres;
-    @Column
-    private String  vintequatro;
-    @Column
-    private String  vintecinco;
-    @Column
-    private String   vinteseis;
-    @Column
-    private String   vintesete;
-    @Column
-    private String  vinteoito;
-
-    @Column
-    private String  trintaeum;
-    @Column
-    private String   trintaedois;
-    @Column
-    private String  trintaetres;
-    @Column
-    private String  trintaequatro;
-    @Column
-    private String   trintaecinco;
-    @Column
-    private String   trintaeseis;
-    @Column
-    private String   trintaesete;
-    @Column
-    private String   trintaeoito;
-
-    @Column
-    private String   quarentaeum;
-    @Column
-    private String   quarentaedois;
-    @Column
-    private String  quarentaetres;
-    @Column
-    private String  quarentaequatro;
-    @Column
-    private String  quarentaecinco;
-    @Column
-    private String   quarentaeseis;
-    @Column
-    private String   quarentaesete;
-    @Column
-    private String  quarentaeoito;
+    private ArrayList dentes = new ArrayList<String>(32);
 
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "data_de_cadastro", updatable = false)
     private LocalDate dataCadastro;
 

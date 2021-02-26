@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/prontuarios")
 public class ProntuarioController {
@@ -22,11 +23,20 @@ public class ProntuarioController {
     public ProntuarioController(ProntuarioRepository repository){
         this.repository = repository;
     }
+
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Prontuario  salvar (@RequestBody @Valid Prontuario prontuario){
-        return repository.save(prontuario);
+        try {
+            return repository.save(prontuario);
+        } catch (Exception ex){
+            throw new ResponseStatusException( HttpStatus.BAD_REQUEST , "Já existe Prontuário para este Paciente!");
+        }
     }
+
+
+
     @GetMapping("{id}")
     public Prontuario findById(@PathVariable Integer id){
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(
