@@ -41,7 +41,7 @@ public class Paciente {
     private String endereco;
 
     @Column
-    @NotEmpty(message = "O NOME não pode ser vazio.")
+    @NotEmpty(message = "O TELEFONE não pode ser vazio.")
     private String telefone;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -56,6 +56,11 @@ public class Paciente {
     public void prePercist() {
         setDataCadastro(LocalDate.now());
     }
+
+
+
+
+
 
 }
 

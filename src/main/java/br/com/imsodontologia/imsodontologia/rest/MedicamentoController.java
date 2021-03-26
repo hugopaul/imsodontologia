@@ -1,7 +1,10 @@
 package br.com.imsodontologia.imsodontologia.rest;
 
+import br.com.imsodontologia.imsodontologia.domain.Medicamento;
+import br.com.imsodontologia.imsodontologia.domain.Paciente;
 import br.com.imsodontologia.imsodontologia.domain.Receituario;
 import br.com.imsodontologia.imsodontologia.repository.MedicamentoRepository;
+import br.com.imsodontologia.imsodontologia.repository.PacienteRepository;
 import br.com.imsodontologia.imsodontologia.repository.ReceituarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,55 +17,59 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/receituarios")
-public class ReceituarioController {
+@RequestMapping("/medicamentos")
+public class MedicamentoController {
 
-    private final ReceituarioRepository repository;
-    private final MedicamentoRepository medicamentoRepository;
+    private final MedicamentoRepository repository;
 
     @Autowired
-    public  ReceituarioController(ReceituarioRepository repository, MedicamentoRepository medicamentoRepository){
+    public  MedicamentoController( MedicamentoRepository repository){
         this.repository = repository;
-        this.medicamentoRepository = medicamentoRepository;
     }
-
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Receituario salvar (@RequestBody @Valid Receituario receituario){
-          medicamentoRepository.saveAll(receituario.getMedicamento());
-        return repository.save(receituario);
+    public Medicamento salvar (@RequestBody @Valid Medicamento medicamento){
+        return repository.save(medicamento);
+    }
+
+    @PostMapping("/saveall")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<Medicamento> saveAll (@RequestBody List<Medicamento> medicamentos){
+        System.out.println();
+        return repository.saveAll(medicamentos);
     }
 
 
-
     @GetMapping("{id}")
-    public Receituario findById(@PathVariable Integer id){
+    public Medicamento findById(@PathVariable Integer id){
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Receituário não Encontrada"
+                        HttpStatus.NOT_FOUND, "Medicamento não encontrado"
                 )
         );
     }
     @GetMapping
-    public List<Receituario> findAll(){
+    public List<Medicamento> findAll(){
         return repository.findAll();
     }
+
+
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Integer id){
         repository.findById(id).map(
-                receituario -> {
-                    repository.delete(receituario);
+                medicamento -> {
+                    repository.delete(medicamento);
                     return Void.TYPE;
                 }
-        ).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Receituário não encontrado"));
+        ).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Medicamento não encontrado"));
     }
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable Integer id, @RequestBody @Valid Receituario receituarioAtualizado){
+    public void update(@PathVariable Integer id, @RequestBody @Valid Medicamento medicamentoAtualizado){
         repository.findById(id).map(receituarioDesatualizada ->{
-            receituarioAtualizado.setId(receituarioDesatualizada.getId());
-            return repository.save(receituarioAtualizado);
+            medicamentoAtualizado.setId(receituarioDesatualizada.getId());
+            return repository.save( medicamentoAtualizado);
         }).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Receituário não Encontrado"));
     }
 }

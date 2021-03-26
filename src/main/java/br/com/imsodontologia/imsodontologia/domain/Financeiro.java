@@ -28,13 +28,16 @@ public class Financeiro {
 
         @OneToOne
         @JoinColumn(name = "id_prontuario")
+        @OnDelete(action = OnDeleteAction.CASCADE)
         @JsonFormat
         private Prontuario prontuario;
 
         @Column
+        @NotNull(message = "O campo VALOR é Obrigatório" )
         private String valor;
 
         @Column
+        @NotNull(message = "O campo SERVIÇO REALIZADO é obrigatório" )
         private String descricao;
 
         @JsonFormat(pattern = "yyyy-MM-dd")

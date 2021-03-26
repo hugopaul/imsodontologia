@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -17,7 +20,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "prontuario",uniqueConstraints = @UniqueConstraint(columnNames = {"id", "id_paciente"}))
+@Table(name = "atendimento",uniqueConstraints = @UniqueConstraint(columnNames = {"id", "id_prontuario"}))
 public class Atendimento {
 
     @Id
@@ -25,6 +28,11 @@ public class Atendimento {
     private Integer id;
 
     @Column
+    @NotNull(message = "O campo VALOR é Obrigatório" )
+    private String valor;
+
+    @Column
+    @NotNull(message = "O campo SERVIÇO REALIZADO é obrigatório" )
     private String atendimento;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -32,6 +40,7 @@ public class Atendimento {
     private LocalDate dataAtendimento;
 
     @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_prontuario")
     @JsonFormat
     private Prontuario prontuario;

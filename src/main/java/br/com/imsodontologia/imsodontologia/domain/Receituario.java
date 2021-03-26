@@ -5,14 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Time;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Data
@@ -26,17 +25,8 @@ public class Receituario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull(message = "O Medicamento deve ser descrito!")
-    @Column
-    private String medicamento;
-
-    @NotNull(message = "Campo horas é obrigatório!")
-    @Column
-    private Time horas;
-
-    @NotNull(message = "O campo Dias é Obrigatório!")
-    @Column
-    private Integer dias;
+    @OneToMany(targetEntity=Medicamento.class, mappedBy="id")
+    private List<Medicamento> medicamento;
 
     @OneToOne
     @JoinColumn(name = "id_prontuario")

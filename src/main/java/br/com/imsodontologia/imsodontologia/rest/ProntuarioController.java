@@ -36,7 +36,6 @@ public class ProntuarioController {
     }
 
 
-
     @GetMapping("{id}")
     public Prontuario findById(@PathVariable Integer id){
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(

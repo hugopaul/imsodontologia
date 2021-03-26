@@ -11,9 +11,11 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -28,13 +30,13 @@ public class Atestado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull(message = "O horário de chegada é obrigatório!")
+    @NotEmpty(message = "O horário de chegada é obrigatório!")
     @Column
-    private Time chegada;
+    private String chegada;
 
-    @NotNull(message = "O horário de saida é obrigatório!")
+    @NotEmpty(message = "O horário de saida é obrigatório!")
     @Column
-    private Time saida;
+    private String saida;
 
     @NotNull(message = "O campo Dias de repouso é obrigatório!")
     @Column
@@ -43,7 +45,7 @@ public class Atestado {
     @Column
     private Integer cid;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_prontuario")
     @NotNull(message = "Escolha o Paciente para registrar!")
     @JsonFormat
