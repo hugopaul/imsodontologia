@@ -21,15 +21,12 @@ public class Medicamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull(message = "O Medicamento deve ser descrito!")
     @Column
     private String medicamento;
 
-    @NotEmpty(message = "Campo horas é obrigatório!")
     @Column
     private String horas;
 
-    @NotNull(message = "O campo Dias é Obrigatório!")
     @Column
     private Integer dias;
 }

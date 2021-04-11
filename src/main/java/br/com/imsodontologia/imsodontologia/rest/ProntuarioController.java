@@ -35,6 +35,16 @@ public class ProntuarioController {
         }
     }
 
+    @GetMapping("prontbypac/{id}")
+    public Prontuario findProntByPac(@PathVariable Integer id ){
+        Prontuario pront = repository.findProntByPac(id);
+        if(pront.getId() != null){
+            return pront;
+        }else{
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrado");
+        }
+
+    }
 
     @GetMapping("{id}")
     public Prontuario findById(@PathVariable Integer id){

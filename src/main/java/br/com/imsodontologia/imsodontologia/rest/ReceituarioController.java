@@ -1,5 +1,7 @@
 package br.com.imsodontologia.imsodontologia.rest;
 
+import br.com.imsodontologia.imsodontologia.domain.Medicamento;
+import br.com.imsodontologia.imsodontologia.domain.Prontuario;
 import br.com.imsodontologia.imsodontologia.domain.Receituario;
 import br.com.imsodontologia.imsodontologia.repository.MedicamentoRepository;
 import br.com.imsodontologia.imsodontologia.repository.ReceituarioRepository;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,7 +33,14 @@ public class ReceituarioController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Receituario salvar (@RequestBody @Valid Receituario receituario){
-          medicamentoRepository.saveAll(receituario.getMedicamento());
+        List<Medicamento> comDados = new ArrayList<>();
+        for(int i = 0 ; i < receituario.getMedicamento().size(); i++){
+            if(receituario.getMedicamento().get(i).getMedicamento() != null ){
+                comDados.add(receituario.getMedicamento().get(i));
+            }
+        }
+        receituario.setMedicamento(comDados);
+
         return repository.save(receituario);
     }
 
@@ -38,11 +48,16 @@ public class ReceituarioController {
 
     @GetMapping("{id}")
     public Receituario findById(@PathVariable Integer id){
+
+
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Receituário não Encontrada"
                 )
         );
     }
+
+
+
     @GetMapping
     public List<Receituario> findAll(){
         return repository.findAll();

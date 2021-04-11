@@ -2,18 +2,14 @@ package br.com.imsodontologia.imsodontologia.domain;
 
 import com.danielfariati.annotation.CPF;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sun.org.apache.xpath.internal.objects.XString;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Date;
 

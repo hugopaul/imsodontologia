@@ -25,8 +25,9 @@ public class Receituario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(targetEntity=Medicamento.class, mappedBy="id")
-    private List<Medicamento> medicamento;
+    @OneToMany(targetEntity = Medicamento.class, cascade=CascadeType.PERSIST)
+    @JoinColumn(name = "id_receituario")
+    private List<Medicamento> medicamento ;
 
     @OneToOne
     @JoinColumn(name = "id_prontuario")

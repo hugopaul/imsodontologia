@@ -2,7 +2,6 @@ package br.com.imsodontologia.imsodontologia.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,27 +35,21 @@ public class Prontuario {
     @JsonFormat
     private Paciente paciente;
 
-    @NotNull(message = "Marque sim ou não no campo DIABÉTICO")
     @Column
     private Boolean diabetico ;
 
-    @NotNull(message = "Marque sim ou não no campo HIPERTENSO")
     @Column
     private Boolean hipertenso;
 
-    @NotNull(message = "Marque sim ou não no campo CARDÍACO")
     @Column
     private Boolean cardiaco ;
 
-    @NotNull(message = "Marque sim ou não no campo DOENÇAS TRANSMISSÍVEIS")
     @Column
     private Boolean dst ;
 
-    @NotNull(message = "Marque sim ou não no campo GESTANTE")
     @Column
     private Boolean gestante;
 
-    @NotNull(message = "Marque sim ou não no campo Epilético")
     @Column
     private Boolean epiletico;
 

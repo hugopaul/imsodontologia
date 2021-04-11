@@ -19,9 +19,6 @@ public class AtestadoController {
 
     private final AtestadoRepository repository;
 
-
-
-
     @Autowired
     public AtestadoController(AtestadoRepository repository){
         this.repository = repository;

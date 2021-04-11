@@ -40,6 +40,18 @@ public class Financeiro {
         @NotNull(message = "O campo SERVIÇO REALIZADO é obrigatório" )
         private String descricao;
 
+        @Column
+        private String observacao;
+
+        @Column
+        private Integer forma;
+
+        @Column
+        private Integer dividido;
+
+        @Column
+        private String status;
+
         @JsonFormat(pattern = "yyyy-MM-dd")
         @Column(name = "data_de_cadastro", updatable = false)
         private LocalDate dataLancamento;
@@ -47,5 +59,6 @@ public class Financeiro {
         @PrePersist
         public void prePercist() {
                 setDataLancamento(LocalDate.now());
+                setStatus("Pendente");
         }
 }

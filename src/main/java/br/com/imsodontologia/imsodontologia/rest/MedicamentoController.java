@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,17 +30,16 @@ public class MedicamentoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Medicamento salvar (@RequestBody @Valid Medicamento medicamento){
-        return repository.save(medicamento);
+    public List<Medicamento> salvar (@RequestBody @Valid List<Medicamento> medicamento){
+         List<Medicamento>  salvados = new ArrayList<>();
+         for(int i = 0 ; i < medicamento.size(); i++){
+             if(medicamento.get(i).getMedicamento() != null ){
+                 repository.save(medicamento.get(i));
+                 salvados.add(medicamento.get(i));
+             }
+         }
+        return salvados;
     }
-
-    @PostMapping("/saveall")
-    @ResponseStatus(HttpStatus.CREATED)
-    public List<Medicamento> saveAll (@RequestBody List<Medicamento> medicamentos){
-        System.out.println();
-        return repository.saveAll(medicamentos);
-    }
-
 
     @GetMapping("{id}")
     public Medicamento findById(@PathVariable Integer id){
@@ -48,6 +48,12 @@ public class MedicamentoController {
                 )
         );
     }
+    @GetMapping("recbyid/{id}")
+    public List<Medicamento> findAllByReceituario(@PathVariable  Integer id){
+        return repository.findAllByReceituario(id);
+    }
+
+
     @GetMapping
     public List<Medicamento> findAll(){
         return repository.findAll();
@@ -64,12 +70,5 @@ public class MedicamentoController {
                 }
         ).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Medicamento não encontrado"));
     }
-    @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable Integer id, @RequestBody @Valid Medicamento medicamentoAtualizado){
-        repository.findById(id).map(receituarioDesatualizada ->{
-            medicamentoAtualizado.setId(receituarioDesatualizada.getId());
-            return repository.save( medicamentoAtualizado);
-        }).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Receituário não Encontrado"));
-    }
+
 }

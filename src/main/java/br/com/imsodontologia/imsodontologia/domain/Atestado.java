@@ -43,7 +43,7 @@ public class Atestado {
     private Integer repouso;
 
     @Column
-    private Integer cid;
+    private String cid;
 
     @ManyToOne
     @JoinColumn(name = "id_prontuario")
