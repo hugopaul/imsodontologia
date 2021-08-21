@@ -1,4 +1,4 @@
-package br.com.imsodontologia.imsodontologia.domain;
+package br.com.imsodontologia.imsodontologia.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,10 +17,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "receituario",uniqueConstraints = @UniqueConstraint(columnNames = {"id", "id_prontuario"}))
+@Table(schema = "ims", name = "tb_receituario",uniqueConstraints = @UniqueConstraint(columnNames = {"id_receituario", "id_prontuario"}))
 public class Receituario {
 
     @Id
+    @Column(name = "id_receituario")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -44,5 +44,35 @@ public class Receituario {
         setDataCadastro(LocalDate.now());
     }
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public List<Medicamento> getMedicamento() {
+        return medicamento;
+    }
+
+    public void setMedicamento(List<Medicamento> medicamento) {
+        this.medicamento = medicamento;
+    }
+
+    public Prontuario getProntuario() {
+        return prontuario;
+    }
+
+    public void setProntuario(Prontuario prontuario) {
+        this.prontuario = prontuario;
+    }
+
+    public LocalDate getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDate dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
 }

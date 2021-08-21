@@ -1,9 +1,7 @@
 package br.com.imsodontologia.imsodontologia.rest;
 
-import br.com.imsodontologia.imsodontologia.domain.Atestado;
-import br.com.imsodontologia.imsodontologia.domain.Paciente;
+import br.com.imsodontologia.imsodontologia.model.Atestado;
 import br.com.imsodontologia.imsodontologia.repository.AtestadoRepository;
-import br.com.imsodontologia.imsodontologia.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,11 +21,13 @@ public class AtestadoController {
     public AtestadoController(AtestadoRepository repository){
         this.repository = repository;
     }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Atestado salvar (@RequestBody @Valid Atestado atestado){
         return repository.save(atestado);
     }
+
     @GetMapping("{id}")
     public Atestado findById(@PathVariable Integer id){
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(

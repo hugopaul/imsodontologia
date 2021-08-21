@@ -1,6 +1,6 @@
 package br.com.imsodontologia.imsodontologia.rest;
 
-import br.com.imsodontologia.imsodontologia.domain.Paciente;
+import br.com.imsodontologia.imsodontologia.model.Paciente;
 import br.com.imsodontologia.imsodontologia.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,6 +46,8 @@ public class PacienteController {
     public List<Paciente> findAll(){
         return repository.findAll();
     }
+
+
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Integer id){

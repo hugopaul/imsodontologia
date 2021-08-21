@@ -1,8 +1,6 @@
 package br.com.imsodontologia.imsodontologia.rest;
 
-import br.com.imsodontologia.imsodontologia.domain.Paciente;
-import br.com.imsodontologia.imsodontologia.domain.Prontuario;
-import br.com.imsodontologia.imsodontologia.repository.PacienteRepository;
+import br.com.imsodontologia.imsodontologia.model.Prontuario;
 import br.com.imsodontologia.imsodontologia.repository.ProntuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.security.ProtectionDomain;
 import java.util.List;
+import java.util.Observable;
 
 @CrossOrigin("*")
 @RestController
@@ -41,10 +41,11 @@ public class ProntuarioController {
         if(pront.getId() != null){
             return pront;
         }else{
-            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrado");
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não encontrado");
         }
 
     }
+
 
     @GetMapping("{id}")
     public Prontuario findById(@PathVariable Integer id){

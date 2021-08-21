@@ -1,8 +1,7 @@
 package br.com.imsodontologia.imsodontologia.rest;
 
-import br.com.imsodontologia.imsodontologia.domain.Medicamento;
-import br.com.imsodontologia.imsodontologia.domain.Prontuario;
-import br.com.imsodontologia.imsodontologia.domain.Receituario;
+import br.com.imsodontologia.imsodontologia.model.Medicamento;
+import br.com.imsodontologia.imsodontologia.model.Receituario;
 import br.com.imsodontologia.imsodontologia.repository.MedicamentoRepository;
 import br.com.imsodontologia.imsodontologia.repository.ReceituarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package br.com.imsodontologia.imsodontologia.domain;
+package br.com.imsodontologia.imsodontologia.model;
 
 
 import lombok.AllArgsConstructor;
@@ -7,17 +7,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(schema = "ims", name = "tb_medicamento")
 public class Medicamento {
 
     @Id
+    @Column(name = "id_medicamento")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

@@ -1,7 +1,6 @@
 package br.com.imsodontologia.imsodontologia.rest;
 
-import br.com.imsodontologia.imsodontologia.domain.Atestado;
-import br.com.imsodontologia.imsodontologia.domain.Financeiro;
+import br.com.imsodontologia.imsodontologia.model.Financeiro;
 import br.com.imsodontologia.imsodontologia.repository.FinanceiroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,6 +39,8 @@ public class FinanceiroController {
     public List<Financeiro> findAll(){
         return repository.findAll();
     }
+
+
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Integer id){
@@ -50,6 +51,8 @@ public class FinanceiroController {
                 }
         ).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Lançamento não encontrado"));
     }
+
+
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Integer id, @RequestBody @Valid Financeiro financeiroAtualizado){
