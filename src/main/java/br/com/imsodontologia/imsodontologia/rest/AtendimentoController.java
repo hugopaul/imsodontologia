@@ -1,6 +1,5 @@
 package br.com.imsodontologia.imsodontologia.rest;
 
-import br.com.imsodontologia.imsodontologia.DTO.AtendimentoDTO;
 import br.com.imsodontologia.imsodontologia.model.Atendimento;
 import br.com.imsodontologia.imsodontologia.repository.AtendimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Observable;
 
 
 @CrossOrigin("*")

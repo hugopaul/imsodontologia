@@ -1,12 +1,10 @@
 package br.com.imsodontologia.imsodontologia.repository;
 
-import br.com.imsodontologia.imsodontologia.DTO.AtendimentoDTO;
 import br.com.imsodontologia.imsodontologia.model.Atendimento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-import java.util.Observable;
 
 public interface AtendimentoRepository extends JpaRepository<Atendimento, Integer> {
 
