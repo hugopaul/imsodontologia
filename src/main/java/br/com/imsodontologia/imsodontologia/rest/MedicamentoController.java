@@ -1,6 +1,8 @@
 package br.com.imsodontologia.imsodontologia.rest;
 
 import br.com.imsodontologia.imsodontologia.model.Medicamento;
+import br.com.imsodontologia.imsodontologia.model.Paciente;
+import br.com.imsodontologia.imsodontologia.model.Receituario;
 import br.com.imsodontologia.imsodontologia.repository.MedicamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/medicamentos")
 public class MedicamentoController {
@@ -44,6 +45,13 @@ public class MedicamentoController {
                 )
         );
     }
+
+    @PostMapping("/buscar-string")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Medicamento> getByNome(@RequestBody String getByNome){
+        return this.repository.buscar(getByNome);
+    }
+
     @GetMapping("recbyid/{id}")
     public List<Medicamento> findAllByReceituario(@PathVariable  Integer id){
         return repository.findAllByReceituario(id);
@@ -55,6 +63,11 @@ public class MedicamentoController {
         return repository.findAll();
     }
 
+   // @GetMapping("/verificaesalva")
+    //@ResponseStatus(HttpStatus.OK)
+    //public Medicamento verifica(@RequestBody Medicamento  verifica){
+    //        return this.repository.getOne(verifica.getId());
+   // }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

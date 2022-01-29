@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -14,10 +15,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Table(schema = "ims", name = "tb_prontuario",uniqueConstraints = @UniqueConstraint(columnNames = {"id_prontuario", "id_paciente"}))
 public class Prontuario {
 
@@ -59,9 +60,11 @@ public class Prontuario {
     private ArrayList dentes = new ArrayList<String>(32);
 
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "data_de_cadastro", updatable = false)
     private LocalDate dataCadastro;
+
+
 
     public Integer getId() {
         return id;
@@ -149,5 +152,27 @@ public class Prontuario {
 
     public void setDataCadastro(LocalDate dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    @PrePersist
+    public void prePercist() {
+        setDataCadastro(LocalDate.now());
+    }
+
+    public Prontuario(Integer id, Paciente paciente, Boolean diabetico, Boolean hipertenso, Boolean cardiaco, Boolean dst, Boolean gestante, Boolean epiletico, String observacao, ArrayList dentes, LocalDate dataCadastro) {
+        this.id = id;
+        this.paciente = paciente;
+        this.diabetico = diabetico;
+        this.hipertenso = hipertenso;
+        this.cardiaco = cardiaco;
+        this.dst = dst;
+        this.gestante = gestante;
+        this.epiletico = epiletico;
+        this.observacao = observacao;
+        this.dentes = dentes;
+        this.dataCadastro = dataCadastro;
+    }
+
+    public Prontuario() {
     }
 }

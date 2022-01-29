@@ -6,17 +6,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 @Table(schema = "ims", name = "tb_paciente")
 public class Paciente {
@@ -42,11 +41,10 @@ public class Paciente {
     @NotEmpty(message = "O TELEFONE não pode ser vazio.")
     private String telefone;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "data_de_nascimento")
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "data_de_cadastro", updatable = false)
     private LocalDate dataCadastro;
 
@@ -55,6 +53,18 @@ public class Paciente {
         setDataCadastro(LocalDate.now());
     }
 
+    public Paciente(Integer id, String paciente, String cpf, String endereco, String telefone, LocalDate dataNascimento, LocalDate dataCadastro) {
+        this.id = id;
+        this.paciente = paciente;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.dataNascimento = dataNascimento;
+        this.dataCadastro = dataCadastro;
+    }
+
+    public Paciente() {
+    }
 
     public Integer getId() {
         return id;
@@ -96,11 +106,11 @@ public class Paciente {
         this.telefone = telefone;
     }
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -111,5 +121,7 @@ public class Paciente {
     public void setDataCadastro(LocalDate dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+
+
 }
 

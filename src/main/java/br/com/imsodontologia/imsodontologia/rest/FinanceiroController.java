@@ -10,7 +10,6 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/financeiros")
 public class FinanceiroController {
@@ -31,7 +30,7 @@ public class FinanceiroController {
     @GetMapping("{id}")
     public Financeiro findById(@PathVariable Integer id){
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Não Encontrado"
+                        HttpStatus.NOT_FOUND, "não Encontrado"
                 )
         );
     }

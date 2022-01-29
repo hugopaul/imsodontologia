@@ -7,11 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Time;
+import java.time.LocalTime;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 @Table(schema = "ims", name = "tb_medicamento")
 public class Medicamento {
@@ -25,8 +24,50 @@ public class Medicamento {
     private String medicamento;
 
     @Column
-    private String horas;
+    private LocalTime horas;
 
     @Column
     private Integer dias;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getMedicamento() {
+        return medicamento;
+    }
+
+    public void setMedicamento(String medicamento) {
+        this.medicamento = medicamento;
+    }
+
+    public LocalTime getHoras() {
+        return horas;
+    }
+
+    public void setHoras(LocalTime horas) {
+        this.horas = horas;
+    }
+
+    public Integer getDias() {
+        return dias;
+    }
+
+    public void setDias(Integer dias) {
+        this.dias = dias;
+    }
+
+    public Medicamento(Integer id, String medicamento, LocalTime horas, Integer dias) {
+        this.id = id;
+        this.medicamento = medicamento;
+        this.horas = horas;
+        this.dias = dias;
+    }
+
+    public Medicamento() {
+    }
 }

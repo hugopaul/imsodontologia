@@ -1,9 +1,11 @@
 package br.com.imsodontologia.imsodontologia.rest;
 
 import br.com.imsodontologia.imsodontologia.model.Medicamento;
+import br.com.imsodontologia.imsodontologia.model.Prontuario;
 import br.com.imsodontologia.imsodontologia.model.Receituario;
 import br.com.imsodontologia.imsodontologia.repository.MedicamentoRepository;
 import br.com.imsodontologia.imsodontologia.repository.ReceituarioRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/receituarios")
 public class ReceituarioController {
@@ -32,13 +33,6 @@ public class ReceituarioController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Receituario salvar (@RequestBody @Valid Receituario receituario){
-        List<Medicamento> comDados = new ArrayList<>();
-        for(int i = 0 ; i < receituario.getMedicamento().size(); i++){
-            if(receituario.getMedicamento().get(i).getMedicamento() != null ){
-                comDados.add(receituario.getMedicamento().get(i));
-            }
-        }
-        receituario.setMedicamento(comDados);
 
         return repository.save(receituario);
     }

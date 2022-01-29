@@ -14,8 +14,6 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 @Table(schema = "ims", name = "tb_atestado",uniqueConstraints = @UniqueConstraint(columnNames = {"id_atestado", "id_prontuario"}))
 public class Atestado {
@@ -47,7 +45,7 @@ public class Atestado {
     @JsonFormat
     private Prontuario prontuario;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "data_de_cadastro", updatable = false)
     private LocalDate dataCadastro;
 
@@ -106,6 +104,19 @@ public class Atestado {
 
     public LocalDate getDataCadastro() {
         return dataCadastro;
+    }
+
+    public Atestado() {
+    }
+
+    public Atestado(Integer id, String chegada, String saida, Integer repouso, String cid, Prontuario prontuario, LocalDate dataCadastro) {
+        this.id = id;
+        this.chegada = chegada;
+        this.saida = saida;
+        this.repouso = repouso;
+        this.cid = cid;
+        this.prontuario = prontuario;
+        this.dataCadastro = dataCadastro;
     }
 
     public void setDataCadastro(LocalDate dataCadastro) {

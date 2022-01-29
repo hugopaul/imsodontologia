@@ -1,9 +1,8 @@
-package br.com.imsodontologia.imsodontologia.rest.exception;
+package br.com.imsodontologia.imsodontologia.exception;
 
 import lombok.Getter;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class ApiError {

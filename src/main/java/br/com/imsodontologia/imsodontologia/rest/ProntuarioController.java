@@ -1,5 +1,6 @@
 package br.com.imsodontologia.imsodontologia.rest;
 
+import br.com.imsodontologia.imsodontologia.model.Paciente;
 import br.com.imsodontologia.imsodontologia.model.Prontuario;
 import br.com.imsodontologia.imsodontologia.repository.ProntuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import java.security.ProtectionDomain;
 import java.util.List;
 import java.util.Observable;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/prontuarios")
 public class ProntuarioController {
@@ -38,14 +38,18 @@ public class ProntuarioController {
     @GetMapping("prontbypac/{id}")
     public Prontuario findProntByPac(@PathVariable Integer id ){
         Prontuario pront = repository.findProntByPac(id);
-        if(pront.getId() != null){
+        if(pront != null){
             return pront;
         }else{
             throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não encontrado");
         }
 
     }
-
+    @PostMapping("/buscar-string")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Prontuario> getByNome(@RequestBody String getByNome){
+        return this.repository.buscar(getByNome);
+    }
 
     @GetMapping("{id}")
     public Prontuario findById(@PathVariable Integer id){

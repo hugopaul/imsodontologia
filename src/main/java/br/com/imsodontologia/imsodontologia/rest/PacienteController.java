@@ -10,7 +10,6 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
@@ -31,6 +30,12 @@ public class PacienteController {
         } catch (Exception ex){
             throw new ResponseStatusException( HttpStatus.BAD_REQUEST , "Esta CPF já foi cadastrado!");
         }
+    }
+
+    @PostMapping("/buscar-string")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Paciente> getByNome(@RequestBody String getByNome){
+        return this.repository.buscar(getByNome);
     }
 
 

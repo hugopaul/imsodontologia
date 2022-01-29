@@ -14,8 +14,6 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 @Table(schema = "ims", name = "tb_financeiro",uniqueConstraints = @UniqueConstraint(columnNames = {"id_financeiro", "id_prontuario"}))
 public class Financeiro {
@@ -51,7 +49,7 @@ public class Financeiro {
         @Column
         private String status;
 
-        @JsonFormat(pattern = "yyyy-MM-dd")
+        @JsonFormat(pattern = "dd-MM-yyyy")
         @Column(name = "data_de_cadastro", updatable = false)
         private LocalDate dataLancamento;
 
@@ -130,6 +128,21 @@ public class Financeiro {
         }
 
         public void setDataLancamento(LocalDate dataLancamento) {
+                this.dataLancamento = dataLancamento;
+        }
+
+        public Financeiro() {
+        }
+
+        public Financeiro(Integer id, Prontuario prontuario, String valor, String descricao, String observacao, Integer forma, Integer dividido, String status, LocalDate dataLancamento) {
+                this.id = id;
+                this.prontuario = prontuario;
+                this.valor = valor;
+                this.descricao = descricao;
+                this.observacao = observacao;
+                this.forma = forma;
+                this.dividido = dividido;
+                this.status = status;
                 this.dataLancamento = dataLancamento;
         }
 }

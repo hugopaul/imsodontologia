@@ -14,8 +14,6 @@ import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 @Table(schema = "ims", name = "tb_receituario",uniqueConstraints = @UniqueConstraint(columnNames = {"id_receituario", "id_prontuario"}))
 public class Receituario {
@@ -25,8 +23,7 @@ public class Receituario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(targetEntity = Medicamento.class, cascade=CascadeType.PERSIST)
-    @JoinColumn(name = "id_receituario")
+    @ManyToOne(targetEntity = Medicamento.class, cascade=CascadeType.PERSIST)
     private List<Medicamento> medicamento ;
 
     @OneToOne
@@ -35,7 +32,7 @@ public class Receituario {
     @JsonFormat
     private Prontuario prontuario;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "data_de_cadastro", updatable = false)
     private LocalDate dataCadastro;
 
@@ -75,4 +72,15 @@ public class Receituario {
     public void setDataCadastro(LocalDate dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+
+    public Receituario(Integer id, List<Medicamento> medicamento, Prontuario prontuario, LocalDate dataCadastro) {
+        this.id = id;
+        this.medicamento = medicamento;
+        this.prontuario = prontuario;
+        this.dataCadastro = dataCadastro;
+    }
+
+    public Receituario() {
+    }
+
 }
