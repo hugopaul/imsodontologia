@@ -1,4 +1,4 @@
-package br.com.imsodontologia.imsodontologia.rest;
+package br.com.imsodontologia.imsodontologia.controller;
 
 import br.com.imsodontologia.imsodontologia.exception.ApiError;
 import org.springframework.http.HttpStatus;

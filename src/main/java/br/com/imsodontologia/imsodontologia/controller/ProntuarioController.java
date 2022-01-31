@@ -1,6 +1,5 @@
-package br.com.imsodontologia.imsodontologia.rest;
+package br.com.imsodontologia.imsodontologia.controller;
 
-import br.com.imsodontologia.imsodontologia.model.Paciente;
 import br.com.imsodontologia.imsodontologia.model.Prontuario;
 import br.com.imsodontologia.imsodontologia.repository.ProntuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.security.ProtectionDomain;
 import java.util.List;
-import java.util.Observable;
 
 @RestController
 @RequestMapping("/prontuarios")

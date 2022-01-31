@@ -1,14 +1,10 @@
-package br.com.imsodontologia.imsodontologia.rest;
+package br.com.imsodontologia.imsodontologia.controller;
 
 import br.com.imsodontologia.imsodontologia.Resource.UsuarioService;
 import br.com.imsodontologia.imsodontologia.model.Usuario;
-import br.com.imsodontologia.imsodontologia.exception.UsuarioCadastradoException;
 import br.com.imsodontologia.imsodontologia.exception.UsuarioFindByIdException;
-import lombok.RequiredArgsConstructor;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 

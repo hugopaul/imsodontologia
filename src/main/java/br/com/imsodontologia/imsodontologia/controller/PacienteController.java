@@ -1,4 +1,4 @@
-package br.com.imsodontologia.imsodontologia.rest;
+package br.com.imsodontologia.imsodontologia.controller;
 
 import br.com.imsodontologia.imsodontologia.model.Paciente;
 import br.com.imsodontologia.imsodontologia.repository.PacienteRepository;
