@@ -1,5 +1,6 @@
 package br.com.imsodontologia.imsodontologia.Resource;
 
+import br.com.imsodontologia.imsodontologia.model.Paciente;
 import br.com.imsodontologia.imsodontologia.model.Usuario;
 import br.com.imsodontologia.imsodontologia.repository.UsuarioRepository;
 import br.com.imsodontologia.imsodontologia.exception.UsuarioCadastradoException;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,13 +43,12 @@ public class UsuarioService implements UserDetailsService {
             return perfil;
     }
 
+    public String getNomePorUsername(String username) {
+        return repository.getNomePorUsername(username);
+    }
+
     public Usuario salvar (Usuario usuario){
-        boolean exists = repository.existsByUsername(usuario.getUsername());
-        if (exists == true){
-                return null;
-        }else {
             return repository.save(usuario);
-        }
     }
 
     public List<Usuario> findAll() {
@@ -60,5 +61,9 @@ public class UsuarioService implements UserDetailsService {
             new UsuarioFindByIdException();
         }
         return this.repository.findById(id);
+    }
+
+    public List<Usuario> buscarDocByNome(String getByNome) {
+        return this.repository.getDocByNome(getByNome);
     }
 }

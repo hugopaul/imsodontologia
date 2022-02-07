@@ -1,8 +1,11 @@
 package br.com.imsodontologia.imsodontologia.controller;
 
 import br.com.imsodontologia.imsodontologia.Resource.UsuarioService;
+import br.com.imsodontologia.imsodontologia.exception.UsuarioCadastradoException;
+import br.com.imsodontologia.imsodontologia.model.Paciente;
 import br.com.imsodontologia.imsodontologia.model.Usuario;
 import br.com.imsodontologia.imsodontologia.exception.UsuarioFindByIdException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,12 +29,11 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> salvar(@RequestBody @Valid Usuario usuario){
-        Usuario teste = usuarioService.salvar(usuario);
-        if( teste == null){
-            return ResponseEntity.badRequest().body("Já existe registro com este Usuário");
-        }else {
-            return ResponseEntity.ok().body("Usuário cadastrado com sucesso!");
+    public Usuario salvar(@RequestBody @Valid Usuario usuario){
+        try {
+            return this.usuarioService.salvar(usuario);
+        }catch (DataIntegrityViolationException e){
+            throw  new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já Cadastrado");
         }
     }
 
@@ -45,8 +47,22 @@ public class UsuarioController {
         if(this.usuarioService.findPerfilByUsusario(usuario) == null) {
             return null;
         }
-        String perfil = this.usuarioService.findPerfilByUsusario(usuario);
         return this.usuarioService.findPerfilByUsusario(usuario);
+    }
+
+    @GetMapping("/nome")
+    @ResponseStatus(HttpStatus.OK)
+    public String getNomePorUsername(@RequestParam String user){
+        if(this.usuarioService.getNomePorUsername(user) == null) {
+            return null;
+        }
+        return this.usuarioService.getNomePorUsername(user);
+    }
+
+    @PostMapping("/buscar-string")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Usuario> getDoutorByNome(@RequestBody String getByNome){
+        return this.usuarioService.buscarDocByNome(getByNome);
     }
 
     @GetMapping("/{id}")

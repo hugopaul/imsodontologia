@@ -5,11 +5,13 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
 @Builder
-@Table(schema = "ims", name = "tb_marcacao",uniqueConstraints = @UniqueConstraint(columnNames = {"id_marcacao", "id_usuario","id_paciente"}))
+@Table(schema = "ims", name = "tb_marcacao")
 public class Marcacao {
 
     @Id
@@ -17,10 +19,10 @@ public class Marcacao {
     private Integer id;
 
     @Column(name = "dt_inicio")
-    private String dtInicio;
+    private LocalDateTime dtInicio;
 
     @Column(name = "dt_fim")
-    private String dtFim;
+    private LocalDateTime dtFim;
 
     @ManyToOne
     @JoinColumn(name = "id_paciente")
@@ -38,19 +40,19 @@ public class Marcacao {
         this.id = id;
     }
 
-    public String getDtInicio() {
+    public LocalDateTime getDtInicio() {
         return dtInicio;
     }
 
-    public void setDtInicio(String dtInicio) {
+    public void setDtInicio(LocalDateTime dtInicio) {
         this.dtInicio = dtInicio;
     }
 
-    public String getDtFim() {
+    public LocalDateTime getDtFim() {
         return dtFim;
     }
 
-    public void setDtFim(String dtFim) {
+    public void setDtFim(LocalDateTime dtFim) {
         this.dtFim = dtFim;
     }
 
@@ -73,7 +75,7 @@ public class Marcacao {
     public Marcacao() {
     }
 
-    public Marcacao(Integer id, String dtInicio, String dtFim, Paciente paciente, Usuario usuario) {
+    public Marcacao(Integer id, LocalDateTime dtInicio, LocalDateTime dtFim, Paciente paciente, Usuario usuario) {
         this.id = id;
         this.dtInicio = dtInicio;
         this.dtFim = dtFim;

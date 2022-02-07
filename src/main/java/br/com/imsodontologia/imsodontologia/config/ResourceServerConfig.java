@@ -12,18 +12,18 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/usuarios/**").hasRole("ADMINISTRADOR")
+        http.authorizeRequests().antMatchers("/**").permitAll();
+                /*.authorizeRequests()
+                .antMatchers("/usuarios/**", "/marcacoes/**").hasRole("ADMINISTRADOR")
                 .antMatchers("/atendimentos/**",
                              "/atestados/**",
                              "/medicamentos/**",
                              "/prontuarios/**"
-                             ,"/receituarios/**" ).hasAnyRole("DENTISTA", "ADMINISTADOR")
-                .antMatchers("/financeiros/**").hasAnyRole("SECRETARIA", "ADMINISTADOR")
+                             ,"/receituarios/**", "/marcacoes/**" ).hasAnyRole("DENTISTA", "ADMINISTADOR")
+                .antMatchers("/financeiros/**", "/marcacoes/**").hasAnyRole("SECRETARIA", "ADMINISTADOR")
                 .antMatchers("/atendimentos/**","/atestados/**","/financeiros/**","/medicamentos/**","/pacientes/**",
                         "/prontuarios/**","/receituarios/**", "/usuarios/**").authenticated()
-                .anyRequest().denyAll();
+                .anyRequest().denyAll();*/
 
     }
 }

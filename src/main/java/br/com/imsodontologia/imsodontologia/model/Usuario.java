@@ -18,6 +18,10 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column
+    @NotEmpty(message = "o campo Nome é obrigatório")
+    private String nome;
+
     @Column(unique = true)
     @NotEmpty(message = "O campo Usuário é obirgatório")
     private String username;
@@ -61,6 +65,14 @@ public class Usuario {
         return registro;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public void setRegistro(String registro) {
         this.registro = registro;
     }
@@ -69,8 +81,9 @@ public class Usuario {
         this.perfil = perfil;
     }
 
-    public Usuario(Integer id, String username, String password, String perfil, String registro) {
+    public Usuario(Integer id, String nome, String username, String password, String perfil, String registro) {
         this.id = id;
+        this.nome = nome;
         this.username = username;
         this.password = password;
         this.perfil = perfil;
